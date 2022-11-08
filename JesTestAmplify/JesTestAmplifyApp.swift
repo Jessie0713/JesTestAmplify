@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Amplify
+import AWSAPIPlugin
+import AWSCognitoAuthPlugin
 
 @main
 struct JesTestAmplifyApp: App {
@@ -14,4 +17,14 @@ struct JesTestAmplifyApp: App {
             ContentView()
         }
     }
+    init() {
+            do {
+                try Amplify.add(plugin: AWSCognitoAuthPlugin())
+                try Amplify.add(plugin: AWSAPIPlugin())
+                try Amplify.configure()
+                print("Amplify configured with API and Auth plugin")
+            } catch {
+                print("Failed to initialize Amplify with \(error)")
+            }
+        }
 }
